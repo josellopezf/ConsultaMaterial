@@ -1,0 +1,75 @@
+<mvc:View controllerName="SCO.BTP.ConsultaMaterial.controller.MainView"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:t="sap.ui.table" 
+    xmlns:custom="SCO.BTP.ConsultaMaterial.customelements"
+    xmlns="sap.m">
+    <Page id="masterPage" showHeader="false" title="{i18n>title}">
+        <subHeader>
+            <Toolbar >
+                <Label class="sapUiSmallMarginBegin" text="Código Material" />
+                <custom:ExtendedInput
+                    showValueHelp="true"
+                    class="sapUiTinyMarginBegin"
+                    placeholder="Ingrese material ..."
+                    change="handleSearchChange"
+                    valueHelpRequest="handleValueHelpRequest"
+                    value="{/SearchText}"
+                    width="11rem"
+                    submit="handleSearch"/>
+                <Button
+                    class="sapUiTinyMarginBegin"
+                    text="Buscar"
+                    icon="sap-icon://search"
+                    press="handleSearch"/>
+            </Toolbar>
+        </subHeader>
+        <content>
+            <t:Table class="sapUiSmallMargin" selectionMode="None" noData="No se obtuvieron materiales"
+                     title="Resultado de la búsqueda" rows="{/Materials}" visibleRowCountMode="Auto">
+                <t:columns>
+                    <t:Column autoResizable="true" sortProperty="{MATNR}" filterProperty="{MATNR}">
+                        <Label text="Material"/>
+                        <t:template>
+                            <Text wrapping='false' text="{= isNaN(${MATNR}) ? '' : parseInt(${MATNR}) }"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column autoResizable="true" sortProperty="{MAKTX}" filterProperty="{MAKTX}">
+                        <Label text="Descripción material"/>
+                        <t:template>
+                            <Text wrapping='false' text="{MAKTX}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column autoResizable="true" sortProperty="{MTART}" filterProperty="{MTART}">
+                        <Label text="Tipo de material"/>
+                        <t:template>
+                            <Text wrapping='false' text="{MTART}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column autoResizable="true" sortProperty="{MFRNR}" filterProperty="{MFRNR}">
+                        <Label text="Fabricante"/>
+                        <t:template>
+                            <Text wrapping='false' text="{= ${MFRNR} === '' ? '' : (isNaN(${MFRNR}) ? ${MFRNR} : parseInt(${MFRNR})) }"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column autoResizable="true" sortProperty="{MFRPN}" filterProperty="{MFRPN}">
+                        <Label text="N° pieza fabricante"/>
+                        <t:template>
+                            <Text wrapping='false' text="{MFRPN}"/>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </content>
+        <footer>
+            <Toolbar>
+                <Button
+                    icon="sap-icon://message-popup"
+                    visible="{= ${message>/}.length > 0}"
+                    text="{= ${message>/}.length}" 
+                    type="Emphasized"
+                    press="handleMessagePopoverPress"/>
+                <ToolbarSpacer/>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

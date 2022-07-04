@@ -1,0 +1,29 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<Dialog 
+		title="Selección de materiales"
+		contentHeight="230px">
+		<content>
+			<TextArea
+				width="100%"
+				height="100%"
+				rows="10"
+				value="{/Query}" />
+		</content>
+		<beginButton>
+			<Button
+				text="Tomar"
+				type="Emphasized"
+				icon="sap-icon://accept"
+				press="handleTomarPress" />
+		</beginButton>
+		<endButton>
+			<Button
+				text="Cancelar"
+				press="handleCancelarPress" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>
